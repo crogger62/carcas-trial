@@ -1758,18 +1758,33 @@ summary {
 <p>Below we will show a few examples, but also notice the vignettes available at <a href="https://cran.r-project.org/package=caracas" class="uri">https://cran.r-project.org/package=caracas</a>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShjYXJhY2FzKVxuXG5gYGAifQ== -->
-<pre class="r"><code>library(caracas)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShjYXJhY2FzKVxuYGBgIn0= -->
+<pre class="r"><code>library(caracas)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog46S847ixY2FyYWNhc+OkvOO4slxuXG5UaGUgZm9sbG93aW5nIG9iamVjdHMgYXJlIG1hc2tlZCBmcm9tIOOkvOO4sXBhY2thZ2U6YmFzZeOkvOO4sjpcblxuICAgICUqJSwgZGlhZywgZGlhZzwtXG4ifQ== -->
+<pre><code>
+Attaching package: 㤼㸱caracas㤼㸲
+
+The following objects are masked from 㤼㸱package:base㤼㸲:
+
+    %*%, diag, diag&lt;-</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Quick start:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBzeW1ib2woJ3gnKVxuZXEgPC0gMip4XjIgLSB4XG5lcVxuXG5gYGAifQ== -->
+<pre class="r"><code>x &lt;- symbol(&#39;x&#39;)
+eq &lt;- 2*x^2 - x
+eq
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogImNhcmFjYXM6IENvbXB1dGVyIEFsZ2VicmEgdmlhIFN5bVB5Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCmh0dHBzOi8vbWlrbC5kay9wb3N0LzIwMjAtY2FyYWNhc192MTAxLw0KDQpJdCBpcyB3aXRoIGdyZWF0IHBsZWFzdXJlIHRoYXQgd2UgY2FuIGFubm91bmNlIHRoZSByZWxlYXNlIG9mIGNhcmFjYXMgdmVyc2lvbiAxLjAuMSB0byBDUkFOIChodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9wYWNrYWdlPWNhcmFjYXMpLg0KDQpUaGUgcGFja2FnZSBlbmFibGVzIHVzZXIgdG8gbWFrZSBjb21wdXRlciBhbGdlYnJhIGZyb20gUiB1c2luZyB0aGUgUHl0aG9uIGxpYnJhcnkgU3ltUHkuDQoNCllvdSBjYW4gbm93IGluc3RhbGwgdGhlIGNhcmFjYXMgcGFja2FnZSBhcyBmb2xsb3dzOg0KDQppbnN0YWxsLnBhY2thZ2VzKCJjYXJhY2FzIikNCkFuZCB0aGVuIGxvYWQgaXQgYnk6DQoNCmxpYnJhcnkoY2FyYWNhcykNClRoZSBzb3VyY2UgY29kZSBhbmQgdGhlIGRldmVsb3BtZW50IHZlcnNpb24gaXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9yLWNhcy9jYXJhY2FzLy4gT25saW5lIGRvY3VtZW50YXRpb24gKG9mIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9uKSBjYW4gYmUgZm91bmQgYXQgaHR0cHM6Ly9yLWNhcy5naXRodWIuaW8vY2FyYWNhcy8uDQoNCkJlbG93IHdlIHdpbGwgc2hvdyBhIGZldyBleGFtcGxlcywgYnV0IGFsc28gbm90aWNlIHRoZSB2aWduZXR0ZXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3BhY2thZ2U9Y2FyYWNhcy4NCg0KDQpgYGB7cn0NCmxpYnJhcnkoY2FyYWNhcykNCg0KYGBgDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogImNhcmFjYXM6IENvbXB1dGVyIEFsZ2VicmEgdmlhIFN5bVB5Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCmh0dHBzOi8vbWlrbC5kay9wb3N0LzIwMjAtY2FyYWNhc192MTAxLw0KDQpJdCBpcyB3aXRoIGdyZWF0IHBsZWFzdXJlIHRoYXQgd2UgY2FuIGFubm91bmNlIHRoZSByZWxlYXNlIG9mIGNhcmFjYXMgdmVyc2lvbiAxLjAuMSB0byBDUkFOIChodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9wYWNrYWdlPWNhcmFjYXMpLg0KDQpUaGUgcGFja2FnZSBlbmFibGVzIHVzZXIgdG8gbWFrZSBjb21wdXRlciBhbGdlYnJhIGZyb20gUiB1c2luZyB0aGUgUHl0aG9uIGxpYnJhcnkgU3ltUHkuDQoNCllvdSBjYW4gbm93IGluc3RhbGwgdGhlIGNhcmFjYXMgcGFja2FnZSBhcyBmb2xsb3dzOg0KDQppbnN0YWxsLnBhY2thZ2VzKCJjYXJhY2FzIikNCkFuZCB0aGVuIGxvYWQgaXQgYnk6DQoNCmxpYnJhcnkoY2FyYWNhcykNClRoZSBzb3VyY2UgY29kZSBhbmQgdGhlIGRldmVsb3BtZW50IHZlcnNpb24gaXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9yLWNhcy9jYXJhY2FzLy4gT25saW5lIGRvY3VtZW50YXRpb24gKG9mIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9uKSBjYW4gYmUgZm91bmQgYXQgaHR0cHM6Ly9yLWNhcy5naXRodWIuaW8vY2FyYWNhcy8uDQoNCkJlbG93IHdlIHdpbGwgc2hvdyBhIGZldyBleGFtcGxlcywgYnV0IGFsc28gbm90aWNlIHRoZSB2aWduZXR0ZXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3BhY2thZ2U9Y2FyYWNhcy4NCg0KDQpgYGB7cn0NCmxpYnJhcnkoY2FyYWNhcykNCmBgYA0KDQpRdWljayBzdGFydDoNCmBgYHtyfQ0KeCA8LSBzeW1ib2woJ3gnKQ0KZXEgPC0gMip4XjIgLSB4DQplcQ0KDQpgYGANCg0K</div>
 
 
 

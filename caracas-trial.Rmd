@@ -1,0 +1,31 @@
+---
+title: "caracas: Computer Algebra via SymPy"
+output: html_notebook
+---
+https://mikl.dk/post/2020-caracas_v101/
+
+It is with great pleasure that we can announce the release of caracas version 1.0.1 to CRAN (https://cran.r-project.org/package=caracas).
+
+The package enables user to make computer algebra from R using the Python library SymPy.
+
+You can now install the caracas package as follows:
+
+install.packages("caracas")
+And then load it by:
+
+library(caracas)
+The source code and the development version is available at https://github.com/r-cas/caracas/. Online documentation (of the development version) can be found at https://r-cas.github.io/caracas/.
+
+Below we will show a few examples, but also notice the vignettes available at https://cran.r-project.org/package=caracas.
+
+
+```{r}
+library(caracas)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.

@@ -124,3 +124,18 @@ tex(sol[[1L]]$p1)
 
 ```
 $\frac{y_{1}}{y_{1} + y_{2} + y_{3}}$
+
+```{r}
+l
+l_e <-as_r(l)
+
+eval(l_e, list(p1 = 0.2, p2 = 0.3, p3 = 0.5, 
+               y1 = 18, y2 = 31, y3 = 51))
+```
+
+More information and examples
+Please refer to one or more of the following:
+
+https://cran.r-project.org/package=caracas
+https://github.com/r-cas/caracas/
+https://r-cas.github.io/caracas/

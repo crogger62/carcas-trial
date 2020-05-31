@@ -21,13 +21,106 @@ Below we will show a few examples, but also notice the vignettes available at ht
 
 ```{r}
 library(caracas)
+library(reticulate)
 ```
 
+Additional steps needed not in article. This is needed to get reticulate to work correctly and to get the packages installed with conda. Link to the article explaining this: https://rstudio.github.io/reticulate/articles/python_packages.html
+
+```{r}
+conda_create("r-reticulate")
+conda_install("r-reticulate","sympy")
+
+```
+Not in article - this puts sympy into the r-space
+```{r}
+#reticulate::use_codaenv("r-reticulate")
+sympy<-import("sympy")
+```
+
+And now the article continues: 
 Quick start:
 ```{r}
 x <- symbol('x')
 eq <- 2*x^2 - x
 eq
 
+cat("As character string:\n")
+as.character(eq)
+
+cat("\nAs R expression:\n")
+as_r(eq)
+
+cat("\nAnd as a tex object:\n")
+tex(eq)
+
+
+```
+$2 x^{2} - x$
+
+```{r}
+solve_sys(eq,x)
+
+
+der(eq,x)
+
+subs(eq,x, "y")
 ```
 
+#Linear Algebra#
+
+```{r}
+
+A <- matrix(c("x", 2, 0, "2*x"), 2, 2)
+B <- as_symbol(A)
+B
+
+
+```
+
+```{r}
+determinant(B)
+
+Binv<- inv(B)
+Binv
+
+tex(Binv)
+```
+$\\left[\\begin{matrix}\\frac{1}{x} & 0\\\\- \\frac{1}{x^{2}} & \\frac{1}{2 x}\\end{matrix}\\right]$
+
+$[\begin{matrix}\frac{1}{x} & 0\\- \frac{1}{x^{2}} & \frac{1}{2 x}\end{matrix}]$
+
+```{r}
+eigen_val(Binv)
+
+```
+
+#Maximising the multinomial likelihood#
+
+```{r}
+p <- as_symbol(paste0("p", 1:3))
+y <- as_symbol(paste0("y", 1:3))
+a <- as_symbol("a")
+l <- sum(y*log(p))
+l
+
+```
+
+```{r}
+L <- -l + a*(sum(p) - 1)
+L
+#
+g <- der(L, c(p, a))
+g
+#
+sol <- solve_sys(g, c(p, a))
+sol
+#
+sol[[1L]]$p1
+
+#
+tex(sol[[1L]]$p1)
+
+
+
+```
+$\frac{y_{1}}{y_{1} + y_{2} + y_{3}}$

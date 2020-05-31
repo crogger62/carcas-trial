@@ -1769,22 +1769,428 @@ The following objects are masked from 㤼㸱package:base㤼㸲:
 
     %*%, diag, diag&lt;-</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Quick start:</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBzeW1ib2woJ3gnKVxuZXEgPC0gMip4XjIgLSB4XG5lcVxuXG5gYGAifQ== -->
-<pre class="r"><code>x &lt;- symbol(&#39;x&#39;)
-eq &lt;- 2*x^2 - x
-eq
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZXRpY3VsYXRlKVxuYGBgIn0= -->
+<pre class="r"><code>library(reticulate)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Additional steps needed not in article. This is needed to get reticulate to work correctly and to get the packages installed with conda. Link to the article explaining this: <a href="https://rstudio.github.io/reticulate/articles/python_packages.html" class="uri">https://rstudio.github.io/reticulate/articles/python_packages.html</a></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29uZGFfY3JlYXRlKFwici1yZXRpY3VsYXRlXCIpXG5gYGAifQ== -->
+<pre class="r"><code>conda_create(&quot;r-reticulate&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQ29sbGVjdGluZyBwYWNrYWdlIG1ldGFkYXRhIChjdXJyZW50X3JlcG9kYXRhLmpzb24pOiAuLi53b3JraW5nLi4uIGRvbmVcblNvbHZpbmcgZW52aXJvbm1lbnQ6IC4uLndvcmtpbmcuLi4gZG9uZVxuXG4jIyBQYWNrYWdlIFBsYW4gIyNcblxuICBlbnZpcm9ubWVudCBsb2NhdGlvbjogQzpcXFVzZXJzXFxjcmFpZ1xcQU5BQ09OfjFcXGVudnNcXHItcmV0aWN1bGF0ZVxuXG4gIGFkZGVkIC8gdXBkYXRlZCBzcGVjczpcbiAgICAtIHB5dGhvblxuXG5cblRoZSBmb2xsb3dpbmcgTkVXIHBhY2thZ2VzIHdpbGwgYmUgSU5TVEFMTEVEOlxuXG4gIGNhLWNlcnRpZmljYXRlcyAgICBjb25kYS1mb3JnZS93aW4tNjQ6OmNhLWNlcnRpZmljYXRlcy0yMDIwLjQuNS4xLWhlY2M1NDg4XzBcbiAgY2VydGlmaSAgICAgICAgICAgIGNvbmRhLWZvcmdlL3dpbi02NDo6Y2VydGlmaS0yMDIwLjQuNS4xLXB5MzhoMzJmNjgzMF8wXG4gIG9wZW5zc2wgICAgICAgICAgICBjb25kYS1mb3JnZS93aW4tNjQ6Om9wZW5zc2wtMS4xLjFnLWhlNzc0NTIyXzBcbiAgcGlwICAgICAgICAgICAgICAgIGNvbmRhLWZvcmdlL25vYXJjaDo6cGlwLTIwLjEuMS1weV8xXG4gIHB5dGhvbiAgICAgICAgICAgICBjb25kYS1mb3JnZS93aW4tNjQ6OnB5dGhvbi0zLjguMi1oNWZkOTljY183X2NweXRob25cbiAgcHl0aG9uX2FiaSAgICAgICAgIGNvbmRhLWZvcmdlL3dpbi02NDo6cHl0aG9uX2FiaS0zLjgtMV9jcDM4XG4gIHNldHVwdG9vbHMgICAgICAgICBjb25kYS1mb3JnZS93aW4tNjQ6OnNldHVwdG9vbHMtNDcuMS4xLXB5MzhoMzJmNjgzMF8wXG4gIHNxbGl0ZSAgICAgICAgICAgICBjb25kYS1mb3JnZS93aW4tNjQ6OnNxbGl0ZS0zLjMwLjEtaGZhNmUyY2RfMFxuICB2YyAgICAgICAgICAgICAgICAgY29uZGEtZm9yZ2Uvd2luLTY0Ojp2Yy0xNC4xLWg4NjliZTdlXzFcbiAgdnMyMDE1X3J1bnRpbWUgICAgIGNvbmRhLWZvcmdlL3dpbi02NDo6dnMyMDE1X3J1bnRpbWUtMTQuMTYuMjcwMTItaDMwZTMyYTBfMlxuICB3aGVlbCAgICAgICAgICAgICAgY29uZGEtZm9yZ2Uvbm9hcmNoOjp3aGVlbC0wLjM0LjItcHlfMVxuICB3aW5jZXJ0c3RvcmUgICAgICAgY29uZGEtZm9yZ2Uvd2luLTY0Ojp3aW5jZXJ0c3RvcmUtMC4yLXB5MzhfMTAwM1xuXG5cblByZXBhcmluZyB0cmFuc2FjdGlvbjogLi4ud29ya2luZy4uLiBkb25lXG5WZXJpZnlpbmcgdHJhbnNhY3Rpb246IC4uLndvcmtpbmcuLi4gZG9uZVxuRXhlY3V0aW5nIHRyYW5zYWN0aW9uOiAuLi53b3JraW5nLi4uIGRvbmVcbiNcbiMgVG8gYWN0aXZhdGUgdGhpcyBlbnZpcm9ubWVudCwgdXNlXG4jXG4jICAgICAkIGNvbmRhIGFjdGl2YXRlIHItcmV0aWN1bGF0ZVxuI1xuIyBUbyBkZWFjdGl2YXRlIGFuIGFjdGl2ZSBlbnZpcm9ubWVudCwgdXNlXG4jXG4jICAgICAkIGNvbmRhIGRlYWN0aXZhdGVcblxuWzFdIFwiQzpcXFxcVXNlcnNcXFxcY3JhaWdcXFxcYW5hY29uZGEzXFxcXGVudnNcXFxcci1yZXRpY3VsYXRlXFxcXHB5dGhvbi5leGVcIlxuIn0= -->
+<pre><code>Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: C:\Users\craig\ANACON~1\envs\r-reticulate
+
+  added / updated specs:
+    - python
+
+
+The following NEW packages will be INSTALLED:
+
+  ca-certificates    conda-forge/win-64::ca-certificates-2020.4.5.1-hecc5488_0
+  certifi            conda-forge/win-64::certifi-2020.4.5.1-py38h32f6830_0
+  openssl            conda-forge/win-64::openssl-1.1.1g-he774522_0
+  pip                conda-forge/noarch::pip-20.1.1-py_1
+  python             conda-forge/win-64::python-3.8.2-h5fd99cc_7_cpython
+  python_abi         conda-forge/win-64::python_abi-3.8-1_cp38
+  setuptools         conda-forge/win-64::setuptools-47.1.1-py38h32f6830_0
+  sqlite             conda-forge/win-64::sqlite-3.30.1-hfa6e2cd_0
+  vc                 conda-forge/win-64::vc-14.1-h869be7e_1
+  vs2015_runtime     conda-forge/win-64::vs2015_runtime-14.16.27012-h30e32a0_2
+  wheel              conda-forge/noarch::wheel-0.34.2-py_1
+  wincertstore       conda-forge/win-64::wincertstore-0.2-py38_1003
+
+
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+#
+# To activate this environment, use
+#
+#     $ conda activate r-reticulate
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+[1] &quot;C:\\Users\\craig\\anaconda3\\envs\\r-reticulate\\python.exe&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29uZGFfaW5zdGFsbChcInItcmV0aWN1bGF0ZVwiLFwic3ltcHlcIilcbmBgYCJ9 -->
+<pre class="r"><code>conda_install(&quot;r-reticulate&quot;,&quot;sympy&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQ29sbGVjdGluZyBwYWNrYWdlIG1ldGFkYXRhIChjdXJyZW50X3JlcG9kYXRhLmpzb24pOiAuLi53b3JraW5nLi4uIGRvbmVcblNvbHZpbmcgZW52aXJvbm1lbnQ6IC4uLndvcmtpbmcuLi4gZG9uZVxuXG4jIyBQYWNrYWdlIFBsYW4gIyNcblxuICBlbnZpcm9ubWVudCBsb2NhdGlvbjogQzpcXFVzZXJzXFxjcmFpZ1xcQU5BQ09OfjFcXGVudnNcXHItcmV0aWN1bGF0ZVxuXG4gIGFkZGVkIC8gdXBkYXRlZCBzcGVjczpcbiAgICAtIHB5dGhvblxuXG5cblRoZSBmb2xsb3dpbmcgcGFja2FnZXMgd2lsbCBiZSBkb3dubG9hZGVkOlxuXG4gICAgcGFja2FnZSAgICAgICAgICAgICAgICAgICAgfCAgICAgICAgICAgIGJ1aWxkXG4gICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tXG4gICAgb3BlbnNzbC0xLjEuMWcgICAgICAgICAgICAgfCAgICAgICBoZTc3NDUyMl8wICAgICAgICAgNC44IE1CXG4gICAgcHl0aG9uLTMuOC4xICAgICAgICAgICAgICAgfCAgICAgICBoNWZkOTljY18xICAgICAgICAxNS45IE1CXG4gICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVG90YWw6ICAgICAgICAyMC43IE1CXG5cblRoZSBmb2xsb3dpbmcgcGFja2FnZXMgd2lsbCBiZSBTVVBFUlNFREVEIGJ5IGEgaGlnaGVyLXByaW9yaXR5IGNoYW5uZWw6XG5cbiAgY2EtY2VydGlmaWNhdGVzICAgIGNvbmRhLWZvcmdlOjpjYS1jZXJ0aWZpY2F0ZXMtMjAyMC40LjV+IC0tPiBwa2dzL21haW46OmNhLWNlcnRpZmljYXRlcy0yMDIwLjEuMS0wXG4gIGNlcnRpZmkgICAgICAgICAgICBjb25kYS1mb3JnZTo6Y2VydGlmaS0yMDIwLjQuNS4xLXB5MzhofiAtLT4gcGtncy9tYWluOjpjZXJ0aWZpLTIwMjAuNC41LjEtcHkzOF8wXG4gIG9wZW5zc2wgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25kYS1mb3JnZSAtLT4gcGtncy9tYWluXG4gIHB5dGhvbiAgICAgICAgICAgICBjb25kYS1mb3JnZTo6cHl0aG9uLTMuOC4yLWg1ZmQ5OWNjXzdffiAtLT4gcGtncy9tYWluOjpweXRob24tMy44LjEtaDVmZDk5Y2NfMVxuXG5cblxuRG93bmxvYWRpbmcgYW5kIEV4dHJhY3RpbmcgUGFja2FnZXNcblxub3BlbnNzbC0xLjEuMWcgICAgICAgfCA0LjggTUIgICAgfCAgICAgICAgICAgIHwgICAwJSBcbm9wZW5zc2wtMS4xLjFnICAgICAgIHwgNC44IE1CICAgIHwgICAgICAgICAgICB8ICAgMCUgXG5vcGVuc3NsLTEuMS4xZyAgICAgICB8IDQuOCBNQiAgICB8ICMjNSAgICAgICAgfCAgMjUlIFxub3BlbnNzbC0xLjEuMWcgICAgICAgfCA0LjggTUIgICAgfCAjIyMjIyMxICAgIHwgIDYxJSBcbm9wZW5zc2wtMS4xLjFnICAgICAgIHwgNC44IE1CICAgIHwgIyMjIyMjIyMjNyB8ICA5OCUgXG5vcGVuc3NsLTEuMS4xZyAgICAgICB8IDQuOCBNQiAgICB8ICMjIyMjIyMjIyMgfCAxMDAlIFxuXG5weXRob24tMy44LjEgICAgICAgICB8IDE1LjkgTUIgICB8ICAgICAgICAgICAgfCAgIDAlIFxucHl0aG9uLTMuOC4xICAgICAgICAgfCAxNS45IE1CICAgfCA2ICAgICAgICAgIHwgICA2JSBcbnB5dGhvbi0zLjguMSAgICAgICAgIHwgMTUuOSBNQiAgIHwgIzYgICAgICAgICB8ICAxNiUgXG5weXRob24tMy44LjEgICAgICAgICB8IDE1LjkgTUIgICB8ICMjNiAgICAgICAgfCAgMjclIFxucHl0aG9uLTMuOC4xICAgICAgICAgfCAxNS45IE1CICAgfCAjIyM0ICAgICAgIHwgIDM1JSBcbnB5dGhvbi0zLjguMSAgICAgICAgIHwgMTUuOSBNQiAgIHwgIyMjIzQgICAgICB8ICA0NCUgXG5weXRob24tMy44LjEgICAgICAgICB8IDE1LjkgTUIgICB8ICMjIyMjMiAgICAgfCAgNTIlIFxucHl0aG9uLTMuOC4xICAgICAgICAgfCAxNS45IE1CICAgfCAjIyMjIyMyICAgIHwgIDYyJSBcbnB5dGhvbi0zLjguMSAgICAgICAgIHwgMTUuOSBNQiAgIHwgIyMjIyMjIzEgICB8ICA3MiUgXG5weXRob24tMy44LjEgICAgICAgICB8IDE1LjkgTUIgICB8ICMjIyMjIyMjMSAgfCAgODElIFxucHl0aG9uLTMuOC4xICAgICAgICAgfCAxNS45IE1CICAgfCAjIyMjIyMjIyMgIHwgIDkxJSBcbnB5dGhvbi0zLjguMSAgICAgICAgIHwgMTUuOSBNQiAgIHwgIyMjIyMjIyMjIyB8IDEwMCUgXG5QcmVwYXJpbmcgdHJhbnNhY3Rpb246IC4uLndvcmtpbmcuLi4gZG9uZVxuVmVyaWZ5aW5nIHRyYW5zYWN0aW9uOiAuLi53b3JraW5nLi4uIGRvbmVcbkV4ZWN1dGluZyB0cmFuc2FjdGlvbjogLi4ud29ya2luZy4uLiBkb25lXG5Db2xsZWN0aW5nIHBhY2thZ2UgbWV0YWRhdGEgKGN1cnJlbnRfcmVwb2RhdGEuanNvbik6IC4uLndvcmtpbmcuLi4gZG9uZVxuU29sdmluZyBlbnZpcm9ubWVudDogLi4ud29ya2luZy4uLiBkb25lXG5cbiMjIFBhY2thZ2UgUGxhbiAjI1xuXG4gIGVudmlyb25tZW50IGxvY2F0aW9uOiBDOlxcVXNlcnNcXGNyYWlnXFxBTkFDT05+MVxcZW52c1xcci1yZXRpY3VsYXRlXG5cbiAgYWRkZWQgLyB1cGRhdGVkIHNwZWNzOlxuICAgIC0gcHl0aG9uXG4gICAgLSBzeW1weVxuXG5cblRoZSBmb2xsb3dpbmcgcGFja2FnZXMgd2lsbCBiZSBkb3dubG9hZGVkOlxuXG4gICAgcGFja2FnZSAgICAgICAgICAgICAgICAgICAgfCAgICAgICAgICAgIGJ1aWxkXG4gICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tXG4gICAgb3BlbnNzbC0xLjEuMWcgICAgICAgICAgICAgfCAgICAgICBoZTc3NDUyMl8wICAgICAgICAgNS43IE1CICBjb25kYS1mb3JnZVxuICAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFRvdGFsOiAgICAgICAgIDUuNyBNQlxuXG5UaGUgZm9sbG93aW5nIE5FVyBwYWNrYWdlcyB3aWxsIGJlIElOU1RBTExFRDpcblxuICBmYXN0Y2FjaGUgICAgICAgICAgY29uZGEtZm9yZ2Uvd2luLTY0OjpmYXN0Y2FjaGUtMS4xLjAtcHkzOGg5ZGU3YTNlXzFcbiAgbXBtYXRoICAgICAgICAgICAgIGNvbmRhLWZvcmdlL25vYXJjaDo6bXBtYXRoLTEuMS4wLXB5XzBcbiAgc3ltcHkgICAgICAgICAgICAgIGNvbmRhLWZvcmdlL3dpbi02NDo6c3ltcHktMS42LXB5MzhoMzJmNjgzMF8wXG5cblRoZSBmb2xsb3dpbmcgcGFja2FnZXMgd2lsbCBiZSBVUERBVEVEOlxuXG4gIGNhLWNlcnRpZmljYXRlcyAgICAgcGtncy9tYWluOjpjYS1jZXJ0aWZpY2F0ZXMtMjAyMC4xLjEtMCAtLT4gY29uZGEtZm9yZ2U6OmNhLWNlcnRpZmljYXRlcy0yMDIwLjQuNS4xLWhlY2M1NDg4XzBcbiAgcHl0aG9uICAgICAgICAgICAgICAgICBwa2dzL21haW46OnB5dGhvbi0zLjguMS1oNWZkOTljY18xIC0tPiBjb25kYS1mb3JnZTo6cHl0aG9uLTMuOC4yLWg1ZmQ5OWNjXzdfY3B5dGhvblxuXG5UaGUgZm9sbG93aW5nIHBhY2thZ2VzIHdpbGwgYmUgU1VQRVJTRURFRCBieSBhIGhpZ2hlci1wcmlvcml0eSBjaGFubmVsOlxuXG4gIGNlcnRpZmkgICAgICAgICAgICAgIHBrZ3MvbWFpbjo6Y2VydGlmaS0yMDIwLjQuNS4xLXB5MzhfMCAtLT4gY29uZGEtZm9yZ2U6OmNlcnRpZmktMjAyMC40LjUuMS1weTM4aDMyZjY4MzBfMFxuICBvcGVuc3NsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwa2dzL21haW4gLS0+IGNvbmRhLWZvcmdlXG5cblxuXG5Eb3dubG9hZGluZyBhbmQgRXh0cmFjdGluZyBQYWNrYWdlc1xuXG5vcGVuc3NsLTEuMS4xZyAgICAgICB8IDUuNyBNQiAgICB8ICAgICAgICAgICAgfCAgIDAlIFxub3BlbnNzbC0xLjEuMWcgICAgICAgfCA1LjcgTUIgICAgfCAgICAgICAgICAgIHwgICAwJSBcbm9wZW5zc2wtMS4xLjFnICAgICAgIHwgNS43IE1CICAgIHwgIzYgICAgICAgICB8ICAxNyUgXG5vcGVuc3NsLTEuMS4xZyAgICAgICB8IDUuNyBNQiAgICB8ICMjIyMyICAgICAgfCAgNDMlIFxub3BlbnNzbC0xLjEuMWcgICAgICAgfCA1LjcgTUIgICAgfCAjIyMjIyM0ICAgIHwgIDY1JSBcbm9wZW5zc2wtMS4xLjFnICAgICAgIHwgNS43IE1CICAgIHwgIyMjIyMjIyM0ICB8ICA4NCUgXG5vcGVuc3NsLTEuMS4xZyAgICAgICB8IDUuNyBNQiAgICB8ICMjIyMjIyMjIyMgfCAxMDAlIFxuUHJlcGFyaW5nIHRyYW5zYWN0aW9uOiAuLi53b3JraW5nLi4uIGRvbmVcblZlcmlmeWluZyB0cmFuc2FjdGlvbjogLi4ud29ya2luZy4uLiBkb25lXG5FeGVjdXRpbmcgdHJhbnNhY3Rpb246IC4uLndvcmtpbmcuLi4gZG9uZVxuIn0= -->
+<pre><code>Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: C:\Users\craig\ANACON~1\envs\r-reticulate
+
+  added / updated specs:
+    - python
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    openssl-1.1.1g             |       he774522_0         4.8 MB
+    python-3.8.1               |       h5fd99cc_1        15.9 MB
+    ------------------------------------------------------------
+                                           Total:        20.7 MB
+
+The following packages will be SUPERSEDED by a higher-priority channel:
+
+  ca-certificates    conda-forge::ca-certificates-2020.4.5~ --&gt; pkgs/main::ca-certificates-2020.1.1-0
+  certifi            conda-forge::certifi-2020.4.5.1-py38h~ --&gt; pkgs/main::certifi-2020.4.5.1-py38_0
+  openssl                                       conda-forge --&gt; pkgs/main
+  python             conda-forge::python-3.8.2-h5fd99cc_7_~ --&gt; pkgs/main::python-3.8.1-h5fd99cc_1
+
+
+
+Downloading and Extracting Packages
+
+openssl-1.1.1g       | 4.8 MB    |            |   0% 
+openssl-1.1.1g       | 4.8 MB    |            |   0% 
+openssl-1.1.1g       | 4.8 MB    | ##5        |  25% 
+openssl-1.1.1g       | 4.8 MB    | ######1    |  61% 
+openssl-1.1.1g       | 4.8 MB    | #########7 |  98% 
+openssl-1.1.1g       | 4.8 MB    | ########## | 100% 
+
+python-3.8.1         | 15.9 MB   |            |   0% 
+python-3.8.1         | 15.9 MB   | 6          |   6% 
+python-3.8.1         | 15.9 MB   | #6         |  16% 
+python-3.8.1         | 15.9 MB   | ##6        |  27% 
+python-3.8.1         | 15.9 MB   | ###4       |  35% 
+python-3.8.1         | 15.9 MB   | ####4      |  44% 
+python-3.8.1         | 15.9 MB   | #####2     |  52% 
+python-3.8.1         | 15.9 MB   | ######2    |  62% 
+python-3.8.1         | 15.9 MB   | #######1   |  72% 
+python-3.8.1         | 15.9 MB   | ########1  |  81% 
+python-3.8.1         | 15.9 MB   | #########  |  91% 
+python-3.8.1         | 15.9 MB   | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done
+Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: C:\Users\craig\ANACON~1\envs\r-reticulate
+
+  added / updated specs:
+    - python
+    - sympy
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    openssl-1.1.1g             |       he774522_0         5.7 MB  conda-forge
+    ------------------------------------------------------------
+                                           Total:         5.7 MB
+
+The following NEW packages will be INSTALLED:
+
+  fastcache          conda-forge/win-64::fastcache-1.1.0-py38h9de7a3e_1
+  mpmath             conda-forge/noarch::mpmath-1.1.0-py_0
+  sympy              conda-forge/win-64::sympy-1.6-py38h32f6830_0
+
+The following packages will be UPDATED:
+
+  ca-certificates     pkgs/main::ca-certificates-2020.1.1-0 --&gt; conda-forge::ca-certificates-2020.4.5.1-hecc5488_0
+  python                 pkgs/main::python-3.8.1-h5fd99cc_1 --&gt; conda-forge::python-3.8.2-h5fd99cc_7_cpython
+
+The following packages will be SUPERSEDED by a higher-priority channel:
+
+  certifi              pkgs/main::certifi-2020.4.5.1-py38_0 --&gt; conda-forge::certifi-2020.4.5.1-py38h32f6830_0
+  openssl                                         pkgs/main --&gt; conda-forge
+
+
+
+Downloading and Extracting Packages
+
+openssl-1.1.1g       | 5.7 MB    |            |   0% 
+openssl-1.1.1g       | 5.7 MB    |            |   0% 
+openssl-1.1.1g       | 5.7 MB    | #6         |  17% 
+openssl-1.1.1g       | 5.7 MB    | ####2      |  43% 
+openssl-1.1.1g       | 5.7 MB    | ######4    |  65% 
+openssl-1.1.1g       | 5.7 MB    | ########4  |  84% 
+openssl-1.1.1g       | 5.7 MB    | ########## | 100% 
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Not in article - this puts sympy into the r-space</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3JldGljdWxhdGU6OnVzZV9jb2RhZW52KFwici1yZXRpY3VsYXRlXCIpXG5zeW1weTwtaW1wb3J0KFwic3ltcHlcIilcbmBgYCJ9 -->
+<pre class="r"><code>#reticulate::use_codaenv(&quot;r-reticulate&quot;)
+sympy&lt;-import(&quot;sympy&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>And now the article continues: Quick start:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBzeW1ib2woJ3gnKVxuZXEgPC0gMip4XjIgLSB4XG5lcVxuYGBgIn0= -->
+<pre class="r"><code>x &lt;- symbol(&#39;x&#39;)
+eq &lt;- 2*x^2 - x
+eq</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiAgICAyICAgIFxuICAgICAgICAgICAyKnggIC0geFxuIn0= -->
+<pre><code>[caracas]:    2    
+           2*x  - x</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KFwiQXMgY2hhcmFjdGVyIHN0cmluZzpcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code>cat(&quot;As character string:\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQXMgY2hhcmFjdGVyIHN0cmluZzpcbiJ9 -->
+<pre><code>As character string:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXMuY2hhcmFjdGVyKGVxKVxuYGBgIn0= -->
+<pre class="r"><code>as.character(eq)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMip4XjIgLSB4XCJcbiJ9 -->
+<pre><code>[1] &quot;2*x^2 - x&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KFwiXFxuQXMgUiBleHByZXNzaW9uOlxcblwiKVxuYGBgIn0= -->
+<pre class="r"><code>cat(&quot;\nAs R expression:\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BcyBSIGV4cHJlc3Npb246XG4ifQ== -->
+<pre><code>
+As R expression:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXNfcihlcSlcbmBgYCJ9 -->
+<pre class="r"><code>as_r(eq)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiZXhwcmVzc2lvbigyKnheMiAtIHgpXG4ifQ== -->
+<pre><code>expression(2*x^2 - x)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KFwiXFxuQW5kIGFzIGEgdGV4IG9iamVjdDpcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code>cat(&quot;\nAnd as a tex object:\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BbmQgYXMgYSB0ZXggb2JqZWN0OlxuIn0= -->
+<pre><code>
+And as a tex object:</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4KGVxKVxuYGBgIn0= -->
+<pre class="r"><code>tex(eq)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMiB4XnsyfSAtIHhcIlxuIn0= -->
+<pre><code>[1] &quot;2 x^{2} - x&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><span class="math inline">\(2 x^{2} - x\)</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc29sdmVfc3lzKGVxLHgpXG5gYGAifQ== -->
+<pre class="r"><code>solve_sys(eq,x)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU29sdXRpb24gMTpcbiAgeCA9ICAwIFxuU29sdXRpb24gMjpcbiAgeCA9ICAxLzIgXG4ifQ== -->
+<pre><code>Solution 1:
+  x =  0 
+Solution 2:
+  x =  1/2 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVyKGVxLHgpXG5gYGAifQ== -->
+<pre class="r"><code>der(eq,x)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiA0KnggLSAxXG4ifQ== -->
+<pre><code>[caracas]: 4*x - 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VicyhlcSx4LCBcInlcIilcbmBgYCJ9 -->
+<pre class="r"><code>subs(eq,x, &quot;y&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiAgICAyICAgIFxuICAgICAgICAgICAyKnkgIC0geVxuIn0= -->
+<pre><code>[caracas]:    2    
+           2*y  - y</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#Linear Algebra#</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5BIDwtIG1hdHJpeChjKFwieFwiLCAyLCAwLCBcIjIqeFwiKSwgMiwgMilcbkIgPC0gYXNfc3ltYm9sKEEpXG5CXG5gYGAifQ== -->
+<pre class="r"><code>
+A &lt;- matrix(c(&quot;x&quot;, 2, 0, &quot;2*x&quot;), 2, 2)
+B &lt;- as_symbol(A)
+B</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiBbeCAgIDAgXVxuICAgICAgICAgICBbICAgICAgXVxuICAgICAgICAgICBbMiAgMip4XVxuIn0= -->
+<pre><code>[caracas]: [x   0 ]
+           [      ]
+           [2  2*x]</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGV0ZXJtaW5hbnQoQilcbmBgYCJ9 -->
+<pre class="r"><code>determinant(B)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiAgICAyXG4gICAgICAgICAgIDIqeFxuIn0= -->
+<pre><code>[caracas]:    2
+           2*x</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQmludjwtIGludihCKVxuQmludlxuYGBgIn0= -->
+<pre class="r"><code>Binv&lt;- inv(B)
+Binv</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiBbIDEgICAgICBdXG4gICAgICAgICAgIFsgLSAgICAwIF1cbiAgICAgICAgICAgWyB4ICAgICAgXVxuICAgICAgICAgICBbICAgICAgICBdXG4gICAgICAgICAgIFstMSAgICAxIF1cbiAgICAgICAgICAgWy0tLSAgLS0tXVxuICAgICAgICAgICBbICAyICAyKnhdXG4gICAgICAgICAgIFsgeCAgICAgIF1cbiJ9 -->
+<pre><code>[caracas]: [ 1      ]
+           [ -    0 ]
+           [ x      ]
+           [        ]
+           [-1    1 ]
+           [---  ---]
+           [  2  2*x]
+           [ x      ]</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGV4KEJpbnYpXG5gYGAifQ== -->
+<pre class="r"><code>tex(Binv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiXFxcXGxlZnRbXFxcXGJlZ2lue21hdHJpeH1cXFxcZnJhY3sxfXt4fSAmIDBcXFxcXFxcXC0gXFxcXGZyYWN7MX17eF57Mn19ICYgXFxcXGZyYWN7MX17MiB4fVxcXFxlbmR7bWF0cml4fVxcXFxyaWdodF1cIlxuIn0= -->
+<pre><code>[1] &quot;\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><span class="math inline">\(\\left[\\begin{matrix}\\frac{1}{x} &amp; 0\\\\- \\frac{1}{x^{2}} &amp; \\frac{1}{2 x}\\end{matrix}\\right]\)</span></p>
+<p><span class="math inline">\([\begin{matrix}\frac{1}{x} &amp; 0\\- \frac{1}{x^{2}} &amp; \frac{1}{2 x}\end{matrix}]\)</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZWlnZW5fdmFsKEJpbnYpXG5gYGAifQ== -->
+<pre class="r"><code>eigen_val(Binv)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cbltbMV1dJGVpZ3ZhbFxuW2NhcmFjYXNdOiAxXG4gICAgICAgICAgIC1cbiAgICAgICAgICAgeFxuXG5bWzFdXSRlaWdtdWx0XG5bMV0gMVxuXG5cbltbMl1dXG5bWzJdXSRlaWd2YWxcbltjYXJhY2FzXTogIDEgXG4gICAgICAgICAgIC0tLVxuICAgICAgICAgICAyKnhcblxuW1syXV0kZWlnbXVsdFxuWzFdIDFcbiJ9 -->
+<pre><code>[[1]]
+[[1]]$eigval
+[caracas]: 1
+           -
+           x
+
+[[1]]$eigmult
+[1] 1
+
+
+[[2]]
+[[2]]$eigval
+[caracas]:  1 
+           ---
+           2*x
+
+[[2]]$eigmult
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#Maximising the multinomial likelihood#</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucCA8LSBhc19zeW1ib2wocGFzdGUwKFwicFwiLCAxOjMpKVxueSA8LSBhc19zeW1ib2wocGFzdGUwKFwieVwiLCAxOjMpKVxuYSA8LSBhc19zeW1ib2woXCJhXCIpXG5sIDwtIHN1bSh5KmxvZyhwKSlcbmxcbmBgYCJ9 -->
+<pre class="r"><code>p &lt;- as_symbol(paste0(&quot;p&quot;, 1:3))
+y &lt;- as_symbol(paste0(&quot;y&quot;, 1:3))
+a &lt;- as_symbol(&quot;a&quot;)
+l &lt;- sum(y*log(p))
+l</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiB5MSpsb2cocDEpICsgeTIqbG9nKHAyKSArIHkzKmxvZyhwMylcbiJ9 -->
+<pre><code>[caracas]: y1*log(p1) + y2*log(p2) + y3*log(p3)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTCA8LSAtbCArIGEqKHN1bShwKSAtIDEpXG5MXG5gYGAifQ== -->
+<pre class="r"><code>L &lt;- -l + a*(sum(p) - 1)
+L</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiBhKihwMSArIHAyICsgcDMgLSAxKSAtIHkxKmxvZyhwMSkgLSB5Mipsb2cocDIpIC0geTMqbG9nKHAzKVxuIn0= -->
+<pre><code>[caracas]: a*(p1 + p2 + p3 - 1) - y1*log(p1) - y2*log(p2) - y3*log(p3)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1xuZyA8LSBkZXIoTCwgYyhwLCBhKSlcbmdcbmBgYCJ9 -->
+<pre class="r"><code>#
+g &lt;- der(L, c(p, a))
+g</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiBbICAgIHkxICAgICAgeTIgICAgICB5MyAgICAgICAgICAgICAgICAgIF1cbiAgICAgICAgICAgW2EgLSAtLSAgYSAtIC0tICBhIC0gLS0gIHAxICsgcDIgKyBwMyAtIDFdXG4gICAgICAgICAgIFsgICAgcDEgICAgICBwMiAgICAgIHAzICAgICAgICAgICAgICAgICAgXVxuIn0= -->
+<pre><code>[caracas]: [    y1      y2      y3                  ]
+           [a - --  a - --  a - --  p1 + p2 + p3 - 1]
+           [    p1      p2      p3                  ]</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1xuc29sIDwtIHNvbHZlX3N5cyhnLCBjKHAsIGEpKVxuc29sXG5gYGAifQ== -->
+<pre class="r"><code>#
+sol &lt;- solve_sys(g, c(p, a))
+sol</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU29sdXRpb24gMTpcbiAgcDEgPSAgICAgICB5MSAgICAgXG4gICAgICAgLS0tLS0tLS0tLS0tXG4gICAgICAgeTEgKyB5MiArIHkzIFxuICBwMiA9ICAgICAgIHkyICAgICBcbiAgICAgICAtLS0tLS0tLS0tLS1cbiAgICAgICB5MSArIHkyICsgeTMgXG4gIHAzID0gICAgICAgeTMgICAgIFxuICAgICAgIC0tLS0tLS0tLS0tLVxuICAgICAgIHkxICsgeTIgKyB5MyBcbiAgYSAgPSAgeTEgKyB5MiArIHkzIFxuIn0= -->
+<pre><code>Solution 1:
+  p1 =       y1     
+       ------------
+       y1 + y2 + y3 
+  p2 =       y2     
+       ------------
+       y1 + y2 + y3 
+  p3 =       y3     
+       ------------
+       y1 + y2 + y3 
+  a  =  y1 + y2 + y3 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1xuc29sW1sxTF1dJHAxXG5gYGAifQ== -->
+<pre class="r"><code>#
+sol[[1L]]$p1</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiAgICAgIHkxICAgICBcbiAgICAgICAgICAgLS0tLS0tLS0tLS0tXG4gICAgICAgICAgIHkxICsgeTIgKyB5M1xuIn0= -->
+<pre><code>[caracas]:      y1     
+           ------------
+           y1 + y2 + y3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1xudGV4KHNvbFtbMUxdXSRwMSlcbmBgYCJ9 -->
+<pre class="r"><code>#
+tex(sol[[1L]]$p1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiXFxcXGZyYWN7eV97MX19e3lfezF9ICsgeV97Mn0gKyB5X3szfX1cIlxuIn0= -->
+<pre><code>[1] &quot;\\frac{y_{1}}{y_{1} + y_{2} + y_{3}}&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><span class="math inline">\(\frac{y_{1}}{y_{1} + y_{2} + y_{3}}\)</span></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubFxuYGBgIn0= -->
+<pre class="r"><code>l</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW2NhcmFjYXNdOiB5MSpsb2cocDEpICsgeTIqbG9nKHAyKSArIHkzKmxvZyhwMylcbiJ9 -->
+<pre><code>[caracas]: y1*log(p1) + y2*log(p2) + y3*log(p3)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubF9lIDwtYXNfcihsKVxuXG5ldmFsKGxfZSwgbGlzdChwMSA9IDAuMiwgcDIgPSAwLjMsIHAzID0gMC41LCBcbiAgICAgICAgICAgICAgIHkxID0gMTgsIHkyID0gMzEsIHkzID0gNTEpKVxuYGBgIn0= -->
+<pre class="r"><code>l_e &lt;-as_r(l)
+
+eval(l_e, list(p1 = 0.2, p2 = 0.3, p3 = 0.5, 
+               y1 = 18, y2 = 31, y3 = 51))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIC0xMDEuNjQzNVxuIn0= -->
+<pre><code>[1] -101.6435</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>More information and examples Please refer to one or more of the following:</p>
+<p><a href="https://cran.r-project.org/package=caracas" class="uri">https://cran.r-project.org/package=caracas</a> <a href="https://github.com/r-cas/caracas/" class="uri">https://github.com/r-cas/caracas/</a> <a href="https://r-cas.github.io/caracas/" class="uri">https://r-cas.github.io/caracas/</a></p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogImNhcmFjYXM6IENvbXB1dGVyIEFsZ2VicmEgdmlhIFN5bVB5Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCmh0dHBzOi8vbWlrbC5kay9wb3N0LzIwMjAtY2FyYWNhc192MTAxLw0KDQpJdCBpcyB3aXRoIGdyZWF0IHBsZWFzdXJlIHRoYXQgd2UgY2FuIGFubm91bmNlIHRoZSByZWxlYXNlIG9mIGNhcmFjYXMgdmVyc2lvbiAxLjAuMSB0byBDUkFOIChodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9wYWNrYWdlPWNhcmFjYXMpLg0KDQpUaGUgcGFja2FnZSBlbmFibGVzIHVzZXIgdG8gbWFrZSBjb21wdXRlciBhbGdlYnJhIGZyb20gUiB1c2luZyB0aGUgUHl0aG9uIGxpYnJhcnkgU3ltUHkuDQoNCllvdSBjYW4gbm93IGluc3RhbGwgdGhlIGNhcmFjYXMgcGFja2FnZSBhcyBmb2xsb3dzOg0KDQppbnN0YWxsLnBhY2thZ2VzKCJjYXJhY2FzIikNCkFuZCB0aGVuIGxvYWQgaXQgYnk6DQoNCmxpYnJhcnkoY2FyYWNhcykNClRoZSBzb3VyY2UgY29kZSBhbmQgdGhlIGRldmVsb3BtZW50IHZlcnNpb24gaXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9yLWNhcy9jYXJhY2FzLy4gT25saW5lIGRvY3VtZW50YXRpb24gKG9mIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9uKSBjYW4gYmUgZm91bmQgYXQgaHR0cHM6Ly9yLWNhcy5naXRodWIuaW8vY2FyYWNhcy8uDQoNCkJlbG93IHdlIHdpbGwgc2hvdyBhIGZldyBleGFtcGxlcywgYnV0IGFsc28gbm90aWNlIHRoZSB2aWduZXR0ZXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3BhY2thZ2U9Y2FyYWNhcy4NCg0KDQpgYGB7cn0NCmxpYnJhcnkoY2FyYWNhcykNCmBgYA0KDQpRdWljayBzdGFydDoNCmBgYHtyfQ0KeCA8LSBzeW1ib2woJ3gnKQ0KZXEgPC0gMip4XjIgLSB4DQplcQ0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogImNhcmFjYXM6IENvbXB1dGVyIEFsZ2VicmEgdmlhIFN5bVB5Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCmh0dHBzOi8vbWlrbC5kay9wb3N0LzIwMjAtY2FyYWNhc192MTAxLw0KDQpJdCBpcyB3aXRoIGdyZWF0IHBsZWFzdXJlIHRoYXQgd2UgY2FuIGFubm91bmNlIHRoZSByZWxlYXNlIG9mIGNhcmFjYXMgdmVyc2lvbiAxLjAuMSB0byBDUkFOIChodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9wYWNrYWdlPWNhcmFjYXMpLg0KDQpUaGUgcGFja2FnZSBlbmFibGVzIHVzZXIgdG8gbWFrZSBjb21wdXRlciBhbGdlYnJhIGZyb20gUiB1c2luZyB0aGUgUHl0aG9uIGxpYnJhcnkgU3ltUHkuDQoNCllvdSBjYW4gbm93IGluc3RhbGwgdGhlIGNhcmFjYXMgcGFja2FnZSBhcyBmb2xsb3dzOg0KDQppbnN0YWxsLnBhY2thZ2VzKCJjYXJhY2FzIikNCkFuZCB0aGVuIGxvYWQgaXQgYnk6DQoNCmxpYnJhcnkoY2FyYWNhcykNClRoZSBzb3VyY2UgY29kZSBhbmQgdGhlIGRldmVsb3BtZW50IHZlcnNpb24gaXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vZ2l0aHViLmNvbS9yLWNhcy9jYXJhY2FzLy4gT25saW5lIGRvY3VtZW50YXRpb24gKG9mIHRoZSBkZXZlbG9wbWVudCB2ZXJzaW9uKSBjYW4gYmUgZm91bmQgYXQgaHR0cHM6Ly9yLWNhcy5naXRodWIuaW8vY2FyYWNhcy8uDQoNCkJlbG93IHdlIHdpbGwgc2hvdyBhIGZldyBleGFtcGxlcywgYnV0IGFsc28gbm90aWNlIHRoZSB2aWduZXR0ZXMgYXZhaWxhYmxlIGF0IGh0dHBzOi8vY3Jhbi5yLXByb2plY3Qub3JnL3BhY2thZ2U9Y2FyYWNhcy4NCg0KDQpgYGB7cn0NCmxpYnJhcnkoY2FyYWNhcykNCmxpYnJhcnkocmV0aWN1bGF0ZSkNCmBgYA0KDQpBZGRpdGlvbmFsIHN0ZXBzIG5lZWRlZCBub3QgaW4gYXJ0aWNsZS4gVGhpcyBpcyBuZWVkZWQgdG8gZ2V0IHJldGljdWxhdGUgdG8gd29yayBjb3JyZWN0bHkgYW5kIHRvIGdldCB0aGUgcGFja2FnZXMgaW5zdGFsbGVkIHdpdGggY29uZGEuIExpbmsgdG8gdGhlIGFydGljbGUgZXhwbGFpbmluZyB0aGlzOiBodHRwczovL3JzdHVkaW8uZ2l0aHViLmlvL3JldGljdWxhdGUvYXJ0aWNsZXMvcHl0aG9uX3BhY2thZ2VzLmh0bWwNCg0KYGBge3J9DQpjb25kYV9jcmVhdGUoInItcmV0aWN1bGF0ZSIpDQpjb25kYV9pbnN0YWxsKCJyLXJldGljdWxhdGUiLCJzeW1weSIpDQoNCmBgYA0KTm90IGluIGFydGljbGUgLSB0aGlzIHB1dHMgc3ltcHkgaW50byB0aGUgci1zcGFjZQ0KYGBge3J9DQojcmV0aWN1bGF0ZTo6dXNlX2NvZGFlbnYoInItcmV0aWN1bGF0ZSIpDQpzeW1weTwtaW1wb3J0KCJzeW1weSIpDQpgYGANCg0KQW5kIG5vdyB0aGUgYXJ0aWNsZSBjb250aW51ZXM6IA0KUXVpY2sgc3RhcnQ6DQpgYGB7cn0NCnggPC0gc3ltYm9sKCd4JykNCmVxIDwtIDIqeF4yIC0geA0KZXENCg0KY2F0KCJBcyBjaGFyYWN0ZXIgc3RyaW5nOlxuIikNCmFzLmNoYXJhY3RlcihlcSkNCg0KY2F0KCJcbkFzIFIgZXhwcmVzc2lvbjpcbiIpDQphc19yKGVxKQ0KDQpjYXQoIlxuQW5kIGFzIGEgdGV4IG9iamVjdDpcbiIpDQp0ZXgoZXEpDQoNCg0KYGBgDQokMiB4XnsyfSAtIHgkDQoNCmBgYHtyfQ0Kc29sdmVfc3lzKGVxLHgpDQoNCg0KZGVyKGVxLHgpDQoNCnN1YnMoZXEseCwgInkiKQ0KYGBgDQoNCiNMaW5lYXIgQWxnZWJyYSMNCg0KYGBge3J9DQoNCkEgPC0gbWF0cml4KGMoIngiLCAyLCAwLCAiMip4IiksIDIsIDIpDQpCIDwtIGFzX3N5bWJvbChBKQ0KQg0KDQoNCmBgYA0KDQpgYGB7cn0NCmRldGVybWluYW50KEIpDQoNCkJpbnY8LSBpbnYoQikNCkJpbnYNCg0KdGV4KEJpbnYpDQpgYGANCiRcXGxlZnRbXFxiZWdpbnttYXRyaXh9XFxmcmFjezF9e3h9ICYgMFxcXFwtIFxcZnJhY3sxfXt4XnsyfX0gJiBcXGZyYWN7MX17MiB4fVxcZW5ke21hdHJpeH1cXHJpZ2h0XSQNCg0KJFtcYmVnaW57bWF0cml4fVxmcmFjezF9e3h9ICYgMFxcLSBcZnJhY3sxfXt4XnsyfX0gJiBcZnJhY3sxfXsyIHh9XGVuZHttYXRyaXh9XSQNCg0KYGBge3J9DQplaWdlbl92YWwoQmludikNCg0KYGBgDQoNCiNNYXhpbWlzaW5nIHRoZSBtdWx0aW5vbWlhbCBsaWtlbGlob29kIw0KDQpgYGB7cn0NCnAgPC0gYXNfc3ltYm9sKHBhc3RlMCgicCIsIDE6MykpDQp5IDwtIGFzX3N5bWJvbChwYXN0ZTAoInkiLCAxOjMpKQ0KYSA8LSBhc19zeW1ib2woImEiKQ0KbCA8LSBzdW0oeSpsb2cocCkpDQpsDQoNCmBgYA0KDQpgYGB7cn0NCkwgPC0gLWwgKyBhKihzdW0ocCkgLSAxKQ0KTA0KIw0KZyA8LSBkZXIoTCwgYyhwLCBhKSkNCmcNCiMNCnNvbCA8LSBzb2x2ZV9zeXMoZywgYyhwLCBhKSkNCnNvbA0KIw0Kc29sW1sxTF1dJHAxDQoNCiMNCnRleChzb2xbWzFMXV0kcDEpDQoNCg0KDQpgYGANCiRcZnJhY3t5X3sxfX17eV97MX0gKyB5X3syfSArIHlfezN9fSQNCg0KYGBge3J9DQpsDQpsX2UgPC1hc19yKGwpDQoNCmV2YWwobF9lLCBsaXN0KHAxID0gMC4yLCBwMiA9IDAuMywgcDMgPSAwLjUsIA0KICAgICAgICAgICAgICAgeTEgPSAxOCwgeTIgPSAzMSwgeTMgPSA1MSkpDQpgYGANCg0KTW9yZSBpbmZvcm1hdGlvbiBhbmQgZXhhbXBsZXMNClBsZWFzZSByZWZlciB0byBvbmUgb3IgbW9yZSBvZiB0aGUgZm9sbG93aW5nOg0KDQpodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy9wYWNrYWdlPWNhcmFjYXMNCmh0dHBzOi8vZ2l0aHViLmNvbS9yLWNhcy9jYXJhY2FzLw0KaHR0cHM6Ly9yLWNhcy5naXRodWIuaW8vY2FyYWNhcy8=</div>
 
 
 
